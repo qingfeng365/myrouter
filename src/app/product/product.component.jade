@@ -2,3 +2,13 @@
   p 这是商品信息组件
   p 商品编号:{{productId}}
   p 商品类型:{{productType}}
+  div
+    a([routerLink]="['./']") 商品描述
+    | &nbsp;
+    a([routerLink]="['./seller',100]") 销售员信息
+    | &nbsp;
+    a([routerLink]="['./',{outlets:{productaux:'aux1'}}]") 打开
+    | &nbsp;
+    a([routerLink]="['./',{outlets:{productaux:null}}]") 关闭
+  router-outlet
+  router-outlet(name="productaux")
