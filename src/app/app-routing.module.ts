@@ -7,6 +7,9 @@ import { ProductDescComponent } from './product-desc/product-desc.component';
 import { SellerInfoComponent } from './seller-info/seller-info.component';
 import { ChatComponent } from './chat/chat.component';
 import { ProductauxComponent } from './productaux/productaux.component';
+import { LoginGuard } from './guard/login.guard';
+import { UnsavedGuard } from './guard/unsaved.guard';
+import { ProductResolveGuard } from './resolve/product-resolve.guard';
 
 const routes: Routes = [
   {
@@ -34,7 +37,12 @@ const routes: Routes = [
         component: ProductauxComponent,
         outlet: 'productaux'
       }
-    ]
+    ],
+    canActivate: [LoginGuard],
+    canDeactivate: [UnsavedGuard],
+    resolve: {
+      product: ProductResolveGuard
+    }
   },
   {
     path: 'chat',
@@ -49,6 +57,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [LoginGuard, UnsavedGuard, ProductResolveGuard]
 })
 export class AppRoutingModule { }
